@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import postgres from 'postgres';
 import { invoices, customers, revenue, users } from '../lib/placeholder-data';
 
@@ -17,6 +17,8 @@ async function seedUsers() {
 
   const insertedUsers = await Promise.all(
     users.map(async (user) => {
+      // TODO: uncomment to hash password
+      console.log('starting seed')
       const hashedPassword = await bcrypt.hash(user.password, 10);
       return sql`
         INSERT INTO users (id, name, email, password)
@@ -102,6 +104,7 @@ async function seedRevenue() {
 }
 
 export async function GET() {
+  console.log('✅ /seed route hit!');
   try {
     const result = await sql.begin((sql) => [
       seedUsers(),
