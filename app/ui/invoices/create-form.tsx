@@ -7,10 +7,18 @@ import {
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
 import { Button } from '@/app/ui/button';
+import { createInvoice } from '@/app/lib/actions';
 
 export default function Form({ customers }: { customers: CustomerField[] }) {
+
+  // const handleButtonClick = () => {
+  //   console.log('Create Invoice button clicked (client-side)');
+  //   // You can add more client-side logic here if needed
+  // };
+
+  
   return (
-    <form>
+    <form action={createInvoice}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Customer Name */}
         <div className="mb-4">
@@ -105,7 +113,7 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
         >
           Cancel
         </Link>
-        <Button type="submit">Create Invoice</Button>
+        <Button type="submit" >Create Invoice</Button>
       </div>
     </form>
   );
